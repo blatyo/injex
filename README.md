@@ -14,14 +14,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
-  2. Ensure `injex` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:injex]]
-    end
-    ```
-
 ## Usage
 
 In modules, instead of:

@@ -7,19 +7,16 @@ defmodule Injex.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: "A simple way to describe dependencies that can be replaced at test time.",
      package: package(),
      deps: deps()]
-  end
-
-  def description do
-    "A simple way to describe dependencies that can be replaced at test time."
   end
 
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: []]
   end
 
   # Dependencies can be Hex packages:
@@ -36,9 +33,8 @@ defmodule Injex.Mixfile do
   end
 
   defp package do
-    [# These are the default files included in the package
-     name: :injex,
-     files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+    [name: :injex,
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Allen Madsen"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/blatyo/injex",
