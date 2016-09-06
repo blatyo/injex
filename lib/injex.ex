@@ -7,7 +7,11 @@ defmodule Injex do
         end
       end
     else
-      dep
+      quote do
+        def unquote(name)() do
+          unquote(dep)
+        end
+      end
     end
   end
 end
