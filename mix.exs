@@ -9,7 +9,8 @@ defmodule Injex.Mixfile do
      start_permanent: Mix.env == :prod,
      description: "A simple way to describe dependencies that can be replaced at test time.",
      package: package(),
-     deps: deps()]
+     deps: deps(),
+     aliases: ["publish": ["hex.publish", &git_tag/1]]]]
   end
 
   # Configuration for the OTP application
@@ -39,5 +40,11 @@ defmodule Injex.Mixfile do
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/blatyo/injex",
               "Docs" => "http://hexdocs.pm/injex"}]
+  end
+
+  defp git_tag(_args) do
+    tag = "v" <> Mix.Project.config[:version]
+    System.cmd("git", ["tag", tag])
+    System.cmd("git", ["push", "origin", tag])
   end
 end
