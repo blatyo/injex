@@ -10,7 +10,7 @@ defmodule Injex.Mixfile do
      description: "A simple way to describe dependencies that can be replaced at test time.",
      package: package(),
      deps: deps(),
-     aliases: ["publish": ["hex.publish", &git_tag/1]]]]
+     aliases: ["publish": ["hex.publish", &git_tag/1]]]
   end
 
   # Configuration for the OTP application
