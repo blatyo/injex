@@ -14,12 +14,13 @@ defmodule Injex.Test do
   end
 
   def injex_override_dependencies(module, deps) do
-    Enum.map(deps, fn({name, override}) ->
+    Enum.map(deps, fn {name, override} ->
       original = apply(module, name, [])
 
       if is_module?(original) && is_module?(override) do
         validate_dep!(module, name, original, override)
       end
+
       Application.put_env(module, name, override)
 
       {name, original}
@@ -27,7 +28,7 @@ defmodule Injex.Test do
   end
 
   def injex_restore_dependencies(module, deps) do
-    Enum.each(deps, fn({name, dep}) ->
+    Enum.each(deps, fn {name, dep} ->
       Application.put_env(module, name, dep)
     end)
   end
@@ -42,13 +43,15 @@ defmodule Injex.Test do
     unknown_funs = MapSet.difference(override_funs, original_funs)
 
     case Enum.count(unknown_funs) do
-      0 -> true
+      0 ->
+        true
+
       _ ->
         raise Error, """
-        Override failed for #{inspect module}.#{name}/0
+        Override failed for #{inspect(module)}.#{name}/0
 
-          Override: #{inspect override}
-          Original: #{inspect original}
+          Override: #{inspect(override)}
+          Original: #{inspect(original)}
 
         Override has the following function signatures that the original does
         not define:

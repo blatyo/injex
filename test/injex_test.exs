@@ -22,19 +22,19 @@ defmodule InjexTest do
 
   describe "inject/2" do
     test "generates a method that defaults the dependency" do
-      assert Injectable.one == InjexTest.One
+      assert Injectable.one() == InjexTest.One
     end
   end
 
   describe "override/2" do
     test "overrides dependencies for scope of the block" do
-      assert Injectable.one == InjexTest.One
+      assert Injectable.one() == InjexTest.One
 
       override Injectable, one: InjexTest.Uno do
-        assert Injectable.one == InjexTest.Uno
+        assert Injectable.one() == InjexTest.Uno
       end
 
-      assert Injectable.one == InjexTest.One
+      assert Injectable.one() == InjexTest.One
     end
 
     test "raises error when mock modules api is not a subset of original" do
@@ -53,6 +53,7 @@ defmodule InjexTest do
       function signatures and needs to be updated. If that is not the case,
       then you should change the overrides additional functions to private.
       """
+
       assert_raise(Injex.Test.Error, text, fn ->
         override Injectable, one: InjexTest.Eins do
         end

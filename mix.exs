@@ -2,15 +2,17 @@ defmodule Injex.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :injex,
-     version: "1.0.3",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     description: "A simple way to describe dependencies that can be replaced at test time.",
-     package: package(),
-     deps: deps(),
-     aliases: ["publish": ["hex.publish", &git_tag/1]]]
+    [
+      app: :injex,
+      version: "1.0.3",
+      elixir: "~> 1.3",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      description: "A simple way to describe dependencies that can be replaced at test time.",
+      package: package(),
+      deps: deps(),
+      aliases: [publish: ["hex.publish", &git_tag/1]]
+    ]
   end
 
   # Configuration for the OTP application
@@ -34,16 +36,17 @@ defmodule Injex.Mixfile do
   end
 
   defp package do
-    [name: :injex,
-     files: ["lib", "mix.exs", "README*", "LICENSE*"],
-     maintainers: ["Allen Madsen"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/blatyo/injex",
-              "Docs" => "http://hexdocs.pm/injex"}]
+    [
+      name: :injex,
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Allen Madsen"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/blatyo/injex", "Docs" => "http://hexdocs.pm/injex"}
+    ]
   end
 
   defp git_tag(_args) do
-    tag = "v" <> Mix.Project.config[:version]
+    tag = "v" <> Mix.Project.config()[:version]
     System.cmd("git", ["tag", tag])
     System.cmd("git", ["push", "origin", tag])
   end
