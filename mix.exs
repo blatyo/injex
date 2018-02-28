@@ -38,7 +38,7 @@ defmodule Injex.Mixfile do
   defp package do
     [
       name: :injex,
-      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*", ".formatter.exs"],
       maintainers: ["Allen Madsen"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/blatyo/injex", "Docs" => "http://hexdocs.pm/injex"}
