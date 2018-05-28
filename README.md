@@ -4,15 +4,11 @@ A simple way to describe dependencies that can be replaced at test time.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add `injex` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:injex, "~> 1.0"}]
-    end
-    ```
+```elixir
+def deps do
+  [{:injex, "~> 1.0"}]
+end
+```
 
 ## Usage
 
