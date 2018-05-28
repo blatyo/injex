@@ -10,7 +10,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
     ```elixir
     def deps do
-      [{:injex, "~> 0.1.0"}]
+      [{:injex, "~> 1.0"}]
     end
     ```
 
@@ -66,4 +66,4 @@ defmodule MyModuleTest do
 end
 ```
 
-The `inject` macro will only include overriding capabilities when `Mix.env` is `:test`. Otherwise, it hardcodes the default dependency.
+The `inject` macro will only include overriding capabilities when `Mix.env` is `:test`. Otherwise, it inlines the default dependency.
