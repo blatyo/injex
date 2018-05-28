@@ -38,7 +38,7 @@ defmodule MyModule do
   def process(data) do
     changeset = # ...
 
-    repo.insert(changeset)
+    repo().insert(changeset)
   end
 end
 ```
