@@ -5,7 +5,7 @@ defmodule Injex do
 
   defp injex(name, dep, :test) do
     quote do
-      defp unquote(name)() do
+      def unquote(name)() do
         Application.get_env(__MODULE__, unquote(name), unquote(dep))
       end
     end
@@ -14,7 +14,7 @@ defmodule Injex do
   defp injex(name, dep, _) do
     quote do
       @__injex_dep__ unquote(dep)
-      defmacrop unquote(name)() do
+      defmacro unquote(name)() do
         quote do: unquote(@__injex_dep__)
       end
     end
