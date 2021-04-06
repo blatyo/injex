@@ -17,10 +17,6 @@ defmodule Injex.Test do
     Enum.map(deps, fn {name, override} ->
       original = apply(module, name, [])
 
-      if is_module?(original) && is_module?(override) do
-        validate_dep!(module, name, original, override)
-      end
-
       Application.put_env(module, name, override)
 
       {name, original}
@@ -35,32 +31,5 @@ defmodule Injex.Test do
 
   defp is_module?(thing) do
     is_atom(thing) && :erlang.function_exported(thing, :module_info, 0)
-  end
-
-  defp validate_dep!(module, name, original, override) do
-    original_funs = MapSet.new(original.__info__(:functions))
-    override_funs = MapSet.new(override.__info__(:functions))
-    unknown_funs = MapSet.difference(override_funs, original_funs)
-
-    case Enum.count(unknown_funs) do
-      0 ->
-        true
-
-      _ ->
-        raise Error, """
-        Override failed for #{inspect(module)}.#{name}/0
-
-          Override: #{inspect(override)}
-          Original: #{inspect(original)}
-
-        Override has the following function signatures that the original does
-        not define:
-
-        #{for {fun, arity} <- unknown_funs, do: "  * #{fun}/#{arity}\n"}
-        Usually, this means your override has diverged from the original's
-        function signatures and needs to be updated. If that is not the case,
-        then you should change the overrides additional functions to private.
-        """
-    end
   end
 end
